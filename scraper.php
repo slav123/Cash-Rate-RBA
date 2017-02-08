@@ -24,7 +24,7 @@ foreach ($ret as $row)
 	if ($effective_date)
 	{
 		scraperwiki::save_sqlite(array('effective_date'), array(
-			'effective_date' => $effective_date,
+			'effective_date' => date("Y-m-d", strtotime($effective_date)),
 			'change'         => $change,
 			'cash_rate'      => $cash_rate
 		));
