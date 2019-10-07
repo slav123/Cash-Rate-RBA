@@ -11,17 +11,31 @@ $url = 'http://www.rba.gov.au/statistics/cash-rate/';
 // Read in a page
 $html = scraperwiki::scrape($url);
 
+//$html = file_get_contents($url);
+
 
 $dom = new simple_html_dom();
 $dom->load($html);
 $ret = $dom->find('#datatable tr');
+
 foreach ($ret as $row)
 {
-	$effective_date = $row->find('th', 0)->plaintext;
-	$change         = $row->find('td', 0)->plaintext;
-	$cash_rate      = $row->find('td', 1)->plaintext;
+	if ($obj_effective_date = $row->find('th', 0))
+	{
+		$effective_date = $obj_effective_date->plaintext;
+	}
 
-	if ($effective_date)
+	if ($obj_change = $row->find('td', 0))
+	{
+		$change = $obj_change->plaintext;
+	}
+
+	if ($obj_cash_rate = $row->find('td', 1))
+	{
+		$cash_rate = $obj_cash_rate->plaintext;
+	}
+
+	if (isset($effective_date))
 	{
 		scraperwiki::save_sqlite(array('effective_date'), array(
 			'effective_date' => date('Y-m-d', strtotime($effective_date)),

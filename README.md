@@ -1,4 +1,4 @@
-##Cash Rate from Reserve Bank of Australia
+## Cash Rate from Reserve Bank of Australia
 
 Scrapes Cash Rates from RBA:
 
