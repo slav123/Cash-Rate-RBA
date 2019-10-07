@@ -3,15 +3,15 @@
 // including some code snippets below that you should find helpful
 
 require 'scraperwiki.php';
-require 'scraperwiki/simple_html_dom.php';
+require 'simple_html_dom.php';
 
 
-$url = '';
+$url = 'http://www.rba.gov.au/statistics/cash-rate/';
 
 // Read in a page
-$html = scraperwiki::scrape('http://www.rba.gov.au/statistics/cash-rate/');
+$html = scraperwiki::scrape($url);
 
-// Find something on the page using css selectors
+
 $dom = new simple_html_dom();
 $dom->load($html);
 $ret = $dom->find('#datatable tr');
@@ -24,7 +24,7 @@ foreach ($ret as $row)
 	if ($effective_date)
 	{
 		scraperwiki::save_sqlite(array('effective_date'), array(
-			'effective_date' => date("Y-m-d", strtotime($effective_date)),
+			'effective_date' => date('Y-m-d', strtotime($effective_date)),
 			'change'         => $change,
 			'cash_rate'      => $cash_rate
 		));
@@ -40,4 +40,3 @@ foreach ($ret as $row)
 // All that matters is that your final data is written to an SQLite database
 // called "data.sqlite" in the current working directory which has at least a table
 // called "data".
-?>
