@@ -6,7 +6,7 @@ require 'scraperwiki.php';
 require 'simple_html_dom.php';
 
 
-$url = 'http://www.rba.gov.au/statistics/cash-rate/';
+$url = 'https://www.rba.gov.au/statistics/cash-rate/';
 
 // Read in a page
 $html = scraperwiki::scrape($url);
