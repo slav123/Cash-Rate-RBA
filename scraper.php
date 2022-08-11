@@ -13,7 +13,6 @@ $html = scraperwiki::scrape($url);
 
 //$html = file_get_contents($url);
 
-
 $dom = new simple_html_dom();
 $dom->load($html);
 $ret = $dom->find('#datatable tr');
@@ -37,7 +36,7 @@ foreach ($ret as $row)
 
 	if (isset($effective_date) && isset($change))
 	{
-		scraperwiki::save_sqlite(array('effective_date'), array(
+		scraperwiki::save_sqlite(array('data'), array(
 			'effective_date' => date('Y-m-d', strtotime($effective_date)),
 			'change'         => $change,
 			'cash_rate'      => $cash_rate
