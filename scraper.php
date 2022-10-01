@@ -17,6 +17,9 @@ $dom = new simple_html_dom();
 $dom->load($html);
 $ret = $dom->find('#datatable tr');
 
+
+//scraperwiki::delete("* from data where 'name'='peter'")
+
 foreach ($ret as $row)
 {
 	if ($obj_effective_date = $row->find('th', 0))
@@ -36,7 +39,7 @@ foreach ($ret as $row)
 
 	if (isset($effective_date) && isset($change))
 	{
-		scraperwiki::save_sqlite(array('data'), array(
+		scraperwiki::save_sqlite(array('effective_date'), array(
 			'effective_date' => date('Y-m-d', strtotime($effective_date)),
 			'change'         => $change,
 			'cash_rate'      => $cash_rate
